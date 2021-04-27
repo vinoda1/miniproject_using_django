@@ -7,6 +7,8 @@ import os
 from django.conf import settings
 # Create your views here.
 
+def page(request):
+    return render(request,'page.html')
 
 def home(request):
     return render(request,"home.html")

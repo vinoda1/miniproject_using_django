@@ -21,6 +21,7 @@ from AUTHPROJECT.settings import *
 #import views.py from book app
 from testapp import views
 urlpatterns = [
+    path('',views.page),
     path('home/', views.home,name="home"),
     path('admin/', admin.site.urls),
     path('index',views.index,name='index'),
