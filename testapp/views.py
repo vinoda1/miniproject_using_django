@@ -1,18 +1,96 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
-from testapp.form import BookForm
-from testapp.models import Book
 from django.core.mail import send_mail,EmailMultiAlternatives
 import os
 from django.conf import settings
+from testapp.models import Course, Resume
+
+from django.views.generic import DetailView
+from easy_pdf.views import PDFTemplateView,PDFTemplateResponseMixin
 # Create your views here.
 
-def page(request):
-    return render(request,'page.html')
+def index(request):
+    return render(request,'index.html')
 
-def home(request):
-    return render(request,"home.html")
+def course_view(request):
+    course_list=Course.objects.all()
+    context={
+        'course_list':course_list
+    }
 
+    return render(request,"course.html",context)
+
+
+def add_course(request): #task="Playing cricket"
+    t=Course(addcourse=request.POST.get('addcourse'))
+    t.save()
+    return redirect("/course")
+
+
+def delete_one_data(request,id):
+    one_course=Course.objects.get(id=id)
+    one_course.delete()
+    return redirect("/course")
+
+def fetch_resume_data(request,id):#id=1
+    resume_list=Resume.objects.get(id=id)
+    context={
+        'resume_list':resume_list
+    }
+    return render(request,"resume.html",context)
+
+
+def create_resume_form(request):
+    if request.method == "POST":
+        summary=request.POST.get('summary')
+        name=request.POST.get('name')
+        phoneno=request.POST.get('phoneno')
+        email=request.POST.get('email')
+        company=request.POST.get('company')
+        duration=request.POST.get('duration')
+        projects=request.POST.get('projects')
+        skills=request.POST.get('skills')
+        softwares=request.POST.get('softwares')
+        certifications=request.POST.get('certifications')
+        achievements=request.POST.get('achievements')
+        strengths=request.POST.get('strengths')
+        weakness=request.POST.get('weakness')
+        schoolname=request.POST.get('schoolname')
+        schoolduration=request.POST.get('schoolduration')
+        schoolmarkspercentage=request.POST.get('schoolmarkspercentage')
+        collegename=request.POST.get('collegename')
+        collegeduration=request.POST.get('collegeduration')
+        collegeuniversity=request.POST.get('collegeuniversity')
+        collegemarkspercentage=request.POST.get('collegemarkspercentage')
+        languages=request.POST.get('languages')
+
+        r=Resume(summary=summary,name=name,phoneno=phoneno,emailid=email,skills=skills,
+        softwares=softwares,company=company,experience=duration,projects=projects,
+        certification=certifications,achievements=achievements,strengths=strengths,
+        weakness=weakness,schoolname=schoolname,schoolduration=schoolduration,percentageofschoolmarks=schoolmarkspercentage,
+        collegename=collegename,collegeduration=collegeduration,percentageofcollegemarks=collegemarkspercentage,
+        collegeuniversity=collegeuniversity,languagesknown=languages)
+        r.save()
+        return redirect("/home")
+        
+    return render(request,"resumeform.html")  
+
+
+def home_view(request):
+    all_resume=Resume.objects.all()
+    return render(request,"home.html",{'all_resume':all_resume})
+
+
+
+class PDFUserDetailView(PDFTemplateResponseMixin, DetailView):
+    model = Resume
+    template_name = 'user_detail.html'
+    context_object_name = "obj"
+
+def delete_resume(request,id):
+    resume=Resume.objects.get(id=id)
+    resume.delete()
+    return redirect("/create")
 
 @login_required
 def java(request):
@@ -50,76 +128,6 @@ def DotNet(request):
 def Subscrib(request):
     return render(request,"subscrib.html")  
 
-@login_required
-def index(request):
-    shelf=Book.objects.all() #select all from book
-
-    return render(request,'index.html',{'book_shelf':shelf})
-
-def upload(request):
-    #using model form to specify the view
-    obj=BookForm()
-
-    if request.method=='POST':
-        # once the form is sumbitted,fetch form params using request
-        obj=BookForm(request.POST,request.FILES)
-        #to validate form fields
-        if obj.is_valid():
-            # save the accepted /form data
-            obj.save()
-            return redirect('index')
-
-        else:
-            return HttpResponse("something wrong,reload <a href='{{url:'index'}}'>reload</a>")
-    
-    else:
-        #if form is loaded first time
-        return render(request,'upload.html',{'upload_form':obj})
-
-def update(request,book_id):
-    # convert it to string
-    book_id=int(book_id)
-
-    try:
-        # using id to fetch particular book details to update 
-        book_select=Book.objects.get(id=book_id)
-
-    except Book.DoesNotExist:
-        return redirect('home')
-
-    else:
-        # to displaying form with filled data
-        book_form=BookForm(request.POST or None,instance=book_select)
-
-        #after updating the all fields, user will submit form
-        if book_form.is_valid():
-            old_image = ""
-            if book_select.picture:
-                old_image = book_select.picture.path
-                #data/fields are updated 
-                form = BookForm(request.POST,request.FILES,instance = book_select)
-                if form.is_valid():
-                    #if you found image at specified location , remove it
-                    if os.path.exists(old_image):
-                        os.remove(old_image)
-                        #updated fields will be saved
-                        form.save()
-            return redirect('index')
-        return render(request,'upload.html',{'upload_form':book_form})  
-def delete(request,book_id):
-    # convert it to string
-    book_id=int(book_id)
-    
-    try:
-        #id is autogenerated field 
-        #using id to fetch particular book details to update
-        book_select=Book.objects.get(id=book_id)
-
-    except Book.DoesNotExist:
-        return redirect('index')
-
-    book_select.delete()
-    return redirect('home')
 
 def Subscrib(request):
     if request.method=='POST':
@@ -133,9 +141,3 @@ def contact(request):
 
 def logout(request):
     return render(request,"logout.html")
-
-
-
-
-
-

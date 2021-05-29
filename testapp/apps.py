@@ -1,5 +1,9 @@
 from django.apps import AppConfig
+from testapp.models import Resume
+
+class ResumeAdmin(admin.ModelAdmin):
+    list_display=['name']
 
 
-class TestappConfig(AppConfig):
-    name = 'testapp'
+
+admin.site.register(Resume,ResumeAdmin)

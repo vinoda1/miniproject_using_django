@@ -1,0 +1,49 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static "demo.css" %}">
+    <title>Course details</title>
+</head>
+<body style="background-color:rgb(112, 195, 206);">
+    
+<div class="container" align="center">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="nav">
+        <a class="navbar-brand" href="#">Add new course to learn</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </nav>
+      <table border="1px" class="table table-bordered table-hover">
+        <thead >
+            <th><h4>Courses</h4></th>
+            <th><h4>ACTION</h4></th>
+        </thead>
+        {% for i in course_list %}
+        <tr>
+            <td><h4>{{i.addcourse}}</h4></td>
+            <td><h4><a href="/delete/{{i.id}}" class="btn btn-danger">DELETE</a></h4></td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <form class="row" method="POST" action="/add/">
+        {% csrf_token %}
+        <div class="col-md-6">
+            <input type="text" name="addcourse" class="form-control"  placeholder="Enter the task here...."><br>
+            <input type="submit" name="" id="" class="btn btn-success">
+            <a href="/course" class="btn btn-primary">HOME</a>
+        </div>
+    </form>
+
+
+</div>
+
+   
+
+</body>
+</html>

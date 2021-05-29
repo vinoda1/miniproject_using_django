@@ -1,0 +1,50 @@
+{% extends "easy_pdf/base.html" %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    
+{% block content %}
+    <div id="content">
+        <img src="{{resume_list.profilepic}}" alt="" style="width: 90px;">
+    <p><b>Summary:</b>{{obj.summary}}</p>
+    <p><b>Name:</b>{{obj.name}}</p>
+    <p><b>Phone No:</b>{{obj.phoneno}}</p>
+    <p><b>Email-id:</b>{{obj.emailid}}</p>
+    <hr>
+    <h3>Latest Experience:</h3>
+    <p><b>Company:</b>{{obj.company}}</p>
+    <p><b>Duration:</b>{{obj.experience}}</p>
+    <p><b>Projects:</b>{{obj.projects}}</p>
+    <hr>
+    <p><b>Skills:</b>{{obj.skills}}</p>
+    <p><b>Softwares:</b>{{obj.softwares}}</p>
+    <p><b>Certifications:</b>{{obj.certification}}</p>
+    <p><b>Achievements:</b>{{obj.achievements}}</p>
+    <hr>
+    <p><b>Strengths:</b>{{obj.strengths}}</p>
+    <p><b>Weakness:</b>{{obj.weakness}}</p>
+    <hr>
+    <h3>Qualification Details:</h3>
+    <p><b>School Name:</b>{{obj.schoolname}}</p>
+    <p><b>School Duration:</b>{{obj.schoolduration}} years</p>
+    <p><b>School Average Percentage:</b>{{obj.percentageofschoolmarks}}%</p><br>
+
+    <p><b>College Name:</b>{{obj.collegename}}</p>
+    <p><b>College Duration:</b>{{obj.collegeduration}} years</p>
+    <p><b>College University:</b>{{obj.collegeuniversity}}</p>
+    <p><b>College Average Percentage:</b>{{obj.percentageofcollegemarks}}%</p><br>
+    <hr>
+    <p><b>Languages Known:</b>{{obj.languagesknown}}</p><br>  
+
+    </div>
+{% endblock %}
+    
+</body>
+</html>

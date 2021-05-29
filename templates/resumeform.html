@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+
+    <div class="container" align="center">
+        <form class="row" method="POST">
+            {% csrf_token %}
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Summary</label>
+                    <textarea type="text" name="summary" class="form-control"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" name="name" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Phone No</label>
+                    <input type="number" name="phoneno" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" name="email" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Company</label>
+                    <input type="text" name="company" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Duration</label>
+                    <input type="text" name="duration" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>projects</label>
+                    <input type="text" name="projects" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Skills</label>
+                    <input type="text" name="skills" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Softwares</label>
+                    <input type="text" name="softwares" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Certifications</label>
+                    <input type="text" name="certifications" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Achievements</label>
+                    <input type="text" name="achievements" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Strengths</label>
+                    <input type="text" name="strengths" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Weakness</label>
+                    <input type="text" name="weakness" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>School Name</label>
+                    <input type="text" name="schoolname" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>School Duration</label>
+                    <input type="text" name="schoolduration" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>School Marks Percentage</label>
+                    <input type="text" name="schoolmarkspercentage" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>College Name</label>
+                    <input type="text" name="collegename" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>College Duration</label>
+                    <input type="text" name="collegeduration" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>College University</label>
+                    <input type="text" name="collegeuniversity" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>College Marks Percentage</label>
+                    <input type="text" name="collegemarkspercentage" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Langauages Known</label>
+                    <input type="text" name="languages" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+
+                
+
+            </div>
+        </form>
+    </div>
+    
+</body>
+</html>
